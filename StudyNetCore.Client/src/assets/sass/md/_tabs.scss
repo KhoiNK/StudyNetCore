@@ -28,7 +28,7 @@
         & > a:focus {
             background-color: transparent;
             border: 0 !important;
-            color: #FFFFFF !important;
+            color: #FFFFFF;
             font-weight: $font-weight-bold;
         }
         &.disabled > a,

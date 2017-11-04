@@ -1,3 +1,26 @@
-<p>
-  artist works!
-</p>
+<div class="row" *ngIf="(artist | json)">
+	<div class="container" id="artist-info">
+		<h3 class="artist-detail-name">
+			<b>{{artist.name}}</b>
+		</h3>
+		{{artist.decription}}
+	</div>
+	<div class="container">
+		<h3>
+			<b>ARTIST'S ARTWORKS</b>
+		</h3>
+		<div class="row same-product-row" id="artist-product">
+			<div class="col-md-2 col-xs-6 product-detail-same-artist-product" *ngFor="let image of artist.images">
+				<div class="product-box">
+					<a [routerLink]="['/client/image-detail', image.id]">
+						<img src="{{image.imgPath}}" class="product-box-img" />
+						<div class="product-box-name">
+							<p>{{image.name}}</p>
+						</div>
+					</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

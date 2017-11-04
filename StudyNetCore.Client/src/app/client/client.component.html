@@ -1,3 +1,63 @@
-<p>
-  client works!
-</p>
+<div class="wrapper">
+	<div class="sidebar sidebar-fixed" data-color="red" data-image="" id="cus_sidebar">
+		<div class="logo text-center">
+			<a class="simple-text">
+				New Gen
+			</a>
+			
+			<i class="material-icons sidebar-icon-collapse" id="sidebar-icon-collapse" (click)="collapseSidebar()">reorder</i>
+		   
+		</div>
+		<div class="sidebar-wrapper">
+			<ul class="nav nav-mobile-menu" id="mobile_nav" hidden></ul>
+			<div class="nav-container">
+				<ul class="nav">
+					<li>
+						<a [routerLink]="['/client']" class="sidebar-link">
+							<i class="material-icons sidebar-icon">dashboard</i>
+							<p>Home</p>
+						</a>
+					</li>
+					<li>
+						<a [routerLink]="['/client/order']" class="sidebar-link">
+							<i class="material-icons sidebar-icon">shopping_cart</i>
+							<p>Your Cart</p>
+						</a>
+					</li>
+					<li>
+						<a [routerLink]="['/client/images']" class="sidebar-link">
+							<i class="material-icons sidebar-icon">color_lens</i>
+							<p>Our Product</p>
+						</a>
+					</li>
+					<li>
+						<a [routerLink]="['/admin']" class="sidebar-link">
+							<i class="material-icons">power_settings_new</i>
+							<p>Login</p>
+						</a>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+		<div class="sidebar-background"></div>
+	</div>
+	<div class="main-panel">
+		<div id="main-panel">
+			<nav class="navbar navbar-transparent navbar-absolute" id="navbarsmallsize" hidden>
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" onclick="toggleSidebar()">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#"></a>
+					</div>
+				</div>
+			</nav>
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+</div>

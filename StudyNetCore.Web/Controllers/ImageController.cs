@@ -45,13 +45,11 @@ namespace StudyNetCore.Web.Controllers
             {
                 var image = Task.Factory.StartNew(() =>
                 {
-                    var artistRepo = _repo.GetDetail(id);
-                    var artist = artistRepo.Translate<Artist, ArtistViewModel>();
-                    artist.Images = artistRepo.Image.Translate<Image, ImageViewModel>();
-                    return artist;
+                    var detail = _repo.GetDetail(id).Translate<Image, ImageViewModel>();
+                    
+                    return detail;
                 });
-                return Ok
-                    (await image);
+                return Ok(await image);
             }
             catch (Exception e)
             {

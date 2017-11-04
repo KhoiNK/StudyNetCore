@@ -1,0 +1,134 @@
+<div class=" row product-detail-cover">
+	<div class="product-detail-cover-background" id="product-detail-cover-background">
+	</div>
+	<div class="product-detail-name-area">
+		<div class="col-md-3"></div>
+		<div id="detail-name" class="col-md-6 col-xs-12" *ngIf="(image | json)">
+			<h3>{{image.artistName | uppercase}} </h3>
+			<p>{{image.name | uppercase}}</p>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
+<div class="container container-content" *ngIf="(image | json) && (artist | json)">
+	<div class="product-detail-avatar">
+		<img src="{{image.imgPath}}" class="img-responsive" />
+	</div>
+	<div class="row" >
+		<button class="art-btn" data-toggle="collapse" data-target="#seeonwall">See on wall</button>
+		<button class="art-btn" (click)="addToCart(image.id)">Add to cart</button>
+	</div>
+	<div class="row collapse" id="seeonwall">
+		<div class="col-xs-12 col-sm-12" style="background:antiquewhite" id="onwallbackground">
+			<div class="col-xs-12">
+				<img src="{{image.imgPath}}" style="width:100px; margin-top: 20px" />
+			</div>
+			<div class="col-xs-12 on-wall-furniture">
+				<img src="../../assets/img/blue-old-couch-png-31.png" id="onwallfurniture" class="img-responsive" />
+
+			</div>
+		</div>
+		<div class="col-xs-12 furniture-row">
+			<div class="col-xs-6 col-md-3">
+				<div id="cp7" class="inl-bl"></div>
+			</div>
+			<div class="col-xs-6 col-md-3 furniture-thumbnail">
+				<img src="../../assets/img/bed_PNG17414.png" (click)="changeFurniture('../../assets/img/bed_PNG17414.png')" />
+			</div>
+			<div class="col-xs-6 col-md-3 furniture-thumbnail">
+				<img src="../../assets/img/table_PNG6970.png" (click)="changeFurniture('../../assets/img/table_PNG6970.png')" />
+			</div>
+			<div class="col-xs-6 col-md-3 furniture-thumbnail">
+				<img src="../../assets/img/blue-old-couch-png-31.png" (click)="changeFurniture('../../assets/img/blue-old-couch-png-31.png')"
+				/>
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+		<ul class="nav nav-tabs product-detail-nav-tab">
+			<li class="active">
+				<a data-toggle="tab" href="#home">DETAIL</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#menu1">ARTIST</a>
+			</li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="home" class="tab-pane cus-tab-pane fade in active" style="text-align:center">
+				<div class="tab-content-area">
+					<div class="card-content table-responsive">
+						<h3>PRODUCT DETAIL</h3>
+						<table class="table">
+							<tbody>
+								<tr>
+									<th>
+										Description
+									</th>
+									<td>
+										{{image.description}}
+									</td>
+								</tr>
+								<tr>
+									<th>
+										Price
+									</th>
+									<td>
+										{{image.price}}
+									</td>
+								</tr>
+								<tr>
+									<th>
+										Artist
+									</th>
+									<td>
+										<a [routerLink]="['/client/artist-detail', artist.id]">{{image.artistName}}</a>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										Resolution
+									</th>
+									<td>
+										{{image.width}} x {{image.height}}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+			<div id="menu1" class="tab-pane fade">
+				<div class="tab-content-area">
+					<div class="row">
+
+						<div class="col-xs-12 col-md-9 product-detail-artist-desc">
+							<h3>{{image.artistName}}</h3>
+
+						</div>
+					</div>
+					<div class="row">
+						<p class="product-detail-same-artist-product-header">
+							<b>MORE FROM THIS ARTIST</b>
+						</p>
+						<div class="row same-product-row" *ngIf="artist.images">
+							<div class="col-md-2 col-xs-6 product-detail-same-artist-product" *ngFor="let artistImage of artist.images" >
+								<div class="product-box" >
+									<a [routerLink]="['/client/image-detail', artistImage.id]">
+										<img src="{{artistImage.imgPath}}" class="product-box-img" />
+										<div class="product-box-name">
+											<p>{{artistImage.name}}</p>
+										</div>
+									</a>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

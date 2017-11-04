@@ -12,6 +12,6 @@ namespace StudyNetCore.Repository.Interfaces
         int AddImage(Image data);
         Boolean UpdateImage(Image data);
         Boolean RemoveImage(int id);
-        Artist GetDetail(int id);
+        Image GetDetail(int id);
     }
 }

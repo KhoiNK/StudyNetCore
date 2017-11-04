@@ -37,12 +37,14 @@ namespace StudyNetCore.Web.Controllers
         {
             try
             {
-                var data = _repo.GetDetail(id);
+                var data =  _repo.GetDetail(id);
                 var artist = new ArtistViewModel();
                 artist = data.Result.Translate<Artist, ArtistViewModel>();
+                var images = new List<ImageViewModel>();
                 foreach(var image in data.Result.Image)
                 {
-                    artist.Images.ToList().Add(image.Translate<Image, ImageViewModel>());
+                    images.Add(image.Translate<Image, ImageViewModel>());
+                    artist.Images = images;
                 }
                 return Ok(artist);
             }

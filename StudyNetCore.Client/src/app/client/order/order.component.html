@@ -1,3 +1,42 @@
-<p>
-  order works!
-</p>
+<div class="main-content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 images-table" id="images-table">
+					<div class="card">
+						<div class="card-header" data-background-color="red">
+							<h4 class="title">Your order</h4>
+						</div>
+						<div class="card-content table-responsive" *ngIf="(images.length | json)">
+							<table class="table">
+								<thead class="text-danger">
+									<tr>
+										<th> </th>
+										<th>Image</th>
+										<th>Name</th>
+										<th>Quantity</th>
+										<th>Price</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let image of images">
+										<td>{{image.id}}</td>
+										<td>
+											<img src="{{image.imgPath}}" style="height: 60px; width:auto" />
+										</td>
+										<td>{{image.name}}</td>
+										<td><input [(ngModel)]="image.quantity" /></td>
+										<td class="text-danger">{{image.price | currency:'VND':false}}</td>
+										<td class="text-danger"><button class="btn btn-success">Update</button></td>
+									</tr>
+								</tbody>
+							</table>
+							<label class="text-danger pull-right"><b>Total: {{total | currency:'VND':false}}</b></label>
+						</div>
+					</div>
+					<button class="btn btn-primary pull-right">Checkout</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- </div> -->

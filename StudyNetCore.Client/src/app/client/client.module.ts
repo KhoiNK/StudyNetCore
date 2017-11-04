@@ -10,6 +10,7 @@ import { ImageComponent } from './image/image.component';
 import { ArtistComponent } from './artist/artist.component';
 import { OrderComponent } from './order/order.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ImageDetailComponent } from './image/image-detail.component';
 
 @NgModule({
 	imports: [
@@ -20,11 +21,18 @@ import { HomepageComponent } from './homepage/homepage.component';
 		ClientRoutingModule
 	],
 	declarations: [
-	ImageComponent,
-	ArtistComponent,
-	OrderComponent,
-	HomepageComponent],
+		ClientComponent,
+		ImageComponent,
+		ArtistComponent,
+		OrderComponent,
+		HomepageComponent,
+		ImageDetailComponent
+	],
 	providers: [
+		{
+			provide: LocationStrategy,
+			useClass: HashLocationStrategy
+		},
 	],
 	bootstrap: [ClientComponent],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -1,21 +1,4 @@
- /*!
 
-  =========================================================
-  * Material Dashboard Angular CLI - V1.4.1
-  =========================================================
-
-  * Product Page: https://www.creative-tim.com/product/material-dashboard-angular2
-  * Copyright 2017 Creative Tim (https://www.creative-tim.com)
-  * Licensed under MIT (https://github.com/creativetimofficial/material-dashboard-angular/blob/master/LICENSE.md)
-
-  =========================================================
-
-  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-  */
-/* ANIMATION */
-/* SHADOWS */
-/* Shadows (from mdl http://www.getmdl.io/) */
 .noUi-target,
 .noUi-target * {
   -webkit-touch-callout: none;
@@ -424,7 +407,7 @@ h2.title {
 }
 
 .wrapper {
-  position: relative;
+  /*position: relative;*/
   top: 0;
   height: 100vh;
 }
@@ -449,7 +432,7 @@ h2.title {
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 4;
   box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 .sidebar .sidebar-wrapper,
@@ -457,7 +440,7 @@ h2.title {
   position: relative;
   height: calc(100vh - 75px);
   overflow: auto;
-  width: 260px;
+  width: 230px;
   z-index: 4;
 }
 .sidebar .logo-img,
@@ -667,7 +650,7 @@ h2.title {
   z-index: 2;
   float: right;
   overflow: auto;
-  width: calc(100% - 260px);
+  width: calc(100% - 230px);
   min-height: 100%;
   -webkit-transform: translate3d(0px, 0, 0);
   -moz-transform: translate3d(0px, 0, 0);
@@ -2086,7 +2069,6 @@ label.control-label {
   font-weight: 400;
 }
 .form-group label.control-label {
-  font-size: 11px;
   line-height: 1.07143;
   color: #AAAAAA;
   font-weight: 400;
@@ -2945,11 +2927,16 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .modal-backdrop {
-  background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0 !important;
 }
-
+.modal-body {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
 .modal .modal-dialog {
-  margin-top: 100px;
+  margin-top: 30px;
+  z-index: 1100 !important;
 }
 .modal .modal-header .close {
   color: #999999;
@@ -3420,9 +3407,9 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   background-color: #3f51b5;
 }
 .navbar.navbar-transparent {
-  background-color: transparent;
-  box-shadow: none;
-  border-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.06);
+    box-shadow: none;
+    border-bottom: 0;
 }
 .navbar.navbar-transparent .logo-container .brand {
   color: #FFFFFF;
@@ -3543,7 +3530,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 footer {
-  border-top: 1px solid #e7e7e7;
+  /*border-top: 1px solid #e7e7e7;*/
 }
 footer ul {
   margin-bottom: 0;
@@ -3937,7 +3924,7 @@ footer .btn {
 .nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
   background-color: transparent;
   border: 0 !important;
-  color: #FFFFFF !important;
+  color: #FFFFFF;
   font-weight: 500;
 }
 .nav-tabs > li.disabled > a, .nav-tabs > li.disabled > a:hover {
@@ -3946,10 +3933,10 @@ footer .btn {
 .nav-tabs > li .material-icons {
   margin: -1px 5px 0 0;
 }
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-  background-color: rgba(255, 255, 255, 0.2);
-  transition: background-color .1s .2s;
-}
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+        background-color: rgba(172, 171, 171, 0.2);
+        transition: background-color .1s .2s;
+    }
 
 .ct-label {
   fill: rgba(0, 0, 0, 0.4);
@@ -4775,7 +4762,7 @@ footer .btn {
   }
 }
 /*          Changes for small display      */
-@media (max-width: 991px) {
+@media (max-width: 1100px) {
   .sidebar {
     display: none;
     box-shadow: none;
@@ -4809,6 +4796,7 @@ footer .btn {
   .navbar-transparent {
     padding-top: 15px;
     background-color: rgba(0, 0, 0, 0.45);
+
   }
 
   body {

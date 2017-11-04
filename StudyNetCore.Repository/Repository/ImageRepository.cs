@@ -60,9 +60,9 @@ namespace StudyNetCore.Repository.Repository
             return false;
         }
 
-        public Artist GetDetail(int id)
+        public Image GetDetail(int id)
         {
-            var image = _db.Artist.Include("Image").Where(x => x.Image.SingleOrDefault().Id == id).SingleOrDefault();
+            var image = _db.Image.Include("Artist").Where(x => x.Id == id).SingleOrDefault();
             if (image != null)
             {
                 return image;
