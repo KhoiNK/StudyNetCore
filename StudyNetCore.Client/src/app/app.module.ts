@@ -9,6 +9,7 @@ import {CurrencyPipe} from '@angular/common'
 
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
+import { ClientComponent } from './client/client.component';
 // import { AdminComponent } from './admin/admin.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -24,6 +25,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 @NgModule({
 	declarations: [
 		AppComponent,
+		ClientComponent,
 		// AdminComponent
 	],
 	imports: [

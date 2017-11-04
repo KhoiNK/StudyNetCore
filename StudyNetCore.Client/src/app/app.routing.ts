@@ -8,6 +8,10 @@ const routes: Routes = [
 		path: 'admin',
 		loadChildren: './admin/admin.module#AdminModule'
 	},
+	{
+		path: 'client',
+		loadChildren: './client/client.module#ClientModule'
+	},
 	{ path: '', redirectTo: 'admin', pathMatch: 'full' }
 ];
 
