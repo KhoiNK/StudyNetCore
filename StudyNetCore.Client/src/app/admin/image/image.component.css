@@ -1,0 +1,10 @@
+.images-table-image{
+	width: 100px;
+	height: 100px;
+	margin: auto;
+	object-fit: cover;
+}
+
+.images-table{
+	transition: all 300ms ease-out;
+}

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace StudyNetCore.Repository.Repository
 {
@@ -16,11 +17,11 @@ namespace StudyNetCore.Repository.Repository
             _db = imageEntities;
         }
 
-        public IEnumerable<Image> GetImage(int pageIndex, int pageSize)
+        public async Task<IEnumerable<Image>> GetImage(int pageIndex, int pageSize)
         {
             
             var skipped = (pageIndex - 1) * pageSize;
-            var images = _db.Image.Include("Artist").OrderBy(x => x.Id).Skip(skipped).Take(pageSize);
+            var images = await _db.Image.Include("Artist").OrderBy(x => x.Id).Skip(skipped).Take(pageSize).ToListAsync();
             return images;
         }
 
@@ -54,14 +55,14 @@ namespace StudyNetCore.Repository.Repository
             {
                 _db.Image.Remove(image);
                 _db.SaveChanges();
-                return true;
+                return true; 
             }
             return false;
         }
 
-        public Image GetDetail(int id)
+        public Artist GetDetail(int id)
         {
-            var image = _db.Image.Include("Artist").Where(x => x.Id == id).SingleOrDefault();
+            var image = _db.Artist.Include("Image").Where(x => x.Image.SingleOrDefault().Id == id).SingleOrDefault();
             if (image != null)
             {
                 return image;

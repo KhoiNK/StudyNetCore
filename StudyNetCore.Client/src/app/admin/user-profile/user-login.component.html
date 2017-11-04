@@ -1,0 +1,35 @@
+<div class="main-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header" data-background-color="red">
+						<h4 class="title">Login</h4>
+					</div>
+					<div class="card-content">
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group form-black label-floating is-empty">
+
+									<label class="control-label">User Name</label>
+
+									<input type="text" class="form-control"  [(ngModel)]="user.UserName" name="username"/>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group form-black label-floating is-empty">
+									<label class="control-label" >Password</label>
+									<input type="password" class="form-control" [(ngModel)]="user.Password" name="password"/>
+								</div>
+							</div>
+						</div>
+
+						<button class="btn btn-danger pull-left" (click)="Login()">Login</button>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

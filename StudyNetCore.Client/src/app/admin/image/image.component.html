@@ -1,0 +1,118 @@
+<div class="main-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 images-table" id="images-table">
+				<div class="card">
+					<div class="card-header" data-background-color="red">
+						<h4 class="title">Simple Table</h4>
+						<p class="category">Here is a subtitle for this table</p>
+					</div>
+					<div class="card-content table-responsive" *ngIf="images?.length > 0">
+						<button class="btn btn-primary pull-right" id="btn-addnew" (click)="addNewClick()" (click)="isAddNew()">New Image</button>
+						<table class="table">
+							<thead class="text-danger">
+								<tr>
+									<th> </th>
+									<th>Image</th>
+									<th>Name</th>
+									<th>Artist</th>
+									<th>Price</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let image of images">
+									<td>{{image.id}}</td>
+									<td>
+										<img src="{{image.imgPath}}" class="images-table-image" />
+									</td>
+									<td>{{image.name}}</td>
+									<td>{{image.artistName}}</td>
+									<td class="text-danger">{{image.price | currency:'VND':false}}</td>
+									<td class="text-danger"><button class="btn btn-default" (click)="editClick(image.id)">Edit</button></td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+				<div class="row">
+					<button class="btn btn-default pull-left" (click)="ChangePage(previous)">Previous</button>
+					<button class="btn btn-default pull-right" (click)="ChangePage(next)">Next</button>
+				</div>
+			</div>
+			<div class="col-md-6" id="create-image-form" hidden="true">
+				<div class="card">
+					<div class="card-header" data-background-color="red">
+						<h4 class="title">Edit Profile</h4>
+						<p class="category">Complete your profile</p>
+					</div>
+					<div class="card-content">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group form-black label-floating is-empty">
+									<label class="control-label">Name</label>
+									<input type="text" class="form-control" [(ngModel)]="image.Name" />
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group form-black label-floating is-empty">
+									<label class="control-label">Description</label>
+									<input type="text" class="form-control" [(ngModel)]="image.Description" />
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group form-black label-floating is-empty" *ngIf="artists">
+									<label class="control-label">Artist</label>
+									<select [(ngModel)]="image.ArtistId" class="form-control">
+										<option *ngFor="let artist of artists" value="{{artist.id}}">{{artist.name}}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group form-black label-floating is-empty">
+									<label class="control-label">Price</label>
+									<input type="text" class="form-control" [(ngModel)]="image.Price">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group form-black label-floating is-empty">
+									<label class="control-label">Height</label>
+									<input type="text" class="form-control" [(ngModel)]="image.Height">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group form-black label-floating is-empty">
+									<label class="control-label">Width</label>
+									<input type="text" class="form-control" [(ngModel)]="image.Width">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<label>Image</label>
+								<img src="{{image.ImgPath}}"/>
+								<input type="file" id="image"/>
+							</div>
+						</div>
+
+						<button class="btn btn-success pull-right" (click)="Create()">Submit</button>
+						<button class="btn btn-danger pull-right">Cancel</button>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- </div> -->

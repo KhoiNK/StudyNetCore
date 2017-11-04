@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using StudyNetCore.Repository.Interfaces;
@@ -21,6 +22,7 @@ namespace StudyNetCore.Web.Controllers
         [HttpPost]
         [ActionName("Login")]
         [AllowAnonymous]
+        [EnableCors("AllowAllOrigins")]
         public IActionResult Login([FromBody] User user)
         {
             var userLogin = _repo.GetUser(user.UserName, user.Password);
@@ -33,10 +35,10 @@ namespace StudyNetCore.Web.Controllers
                     var response = new
                     {
                         access_token = token,
-                        expires_in = (int)TimeSpan.FromMinutes(30).TotalSeconds,
+                        expires_in = (int)TimeSpan.FromMinutes(6000).TotalSeconds,
                         userName = user.UserName
                     };
-                    return Ok(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
+                    return Ok(response);
                 }
             }
             return BadRequest();

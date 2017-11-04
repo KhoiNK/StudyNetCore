@@ -28,7 +28,7 @@ namespace StudyNetCore.Web.Provider
                 var token = new JwtSecurityToken(Constant.Values.Issuer,
                   Constant.Values.Issuer,
                   claims,
-                  expires: DateTime.Now.AddMinutes(30),
+                  expires: DateTime.Now.AddMinutes(6000),
                   signingCredentials: creds);
 
                 return token;

@@ -29,6 +29,8 @@ namespace StudyNetCore.Web
             services.AddDbContext<ImageContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ImageEntities")));
             services.AddScoped<IUserInterface, UserRepository>();
             services.AddScoped<IImageRepository, ImageRepository>();
+            services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -37,7 +39,7 @@ namespace StudyNetCore.Web
             {
                 cfg.RequireHttpsMetadata = false;
                 cfg.SaveToken = true;
-                
+
                 cfg.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidIssuer = Configuration["Tokens:Issuer"],
@@ -46,6 +48,14 @@ namespace StudyNetCore.Web
                 };
 
             });
+            services.AddCors(options => options.AddPolicy("AllowAllOrigins",
+                builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
+                })
+            );
 
             Translator.InitMapper();
         }
@@ -63,6 +73,13 @@ namespace StudyNetCore.Web
             //{
 
             //});
+            app.UseCors(
+                options => {
+                    options.AllowAnyOrigin();
+                    options.AllowAnyHeader();
+                    options.AllowAnyMethod();
+                }
+            );
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
