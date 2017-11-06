@@ -61,10 +61,11 @@ namespace StudyNetCore.Repository.Repository
             return true;
         }
 
-        public async Task<bool> UpdateOrderDetail(OrderDetail data)
+        public async Task<bool> CreateOrderDetail(OrderDetail data)
         {
-            var orderDetail = await _db.OrderDetail.FindAsync(data.Id);
-            orderDetail.Quantity = data.Quantity;
+            var orderdetail = new OrderDetail();
+            orderdetail = data;
+            await _db.OrderDetail.AddAsync(orderdetail);
             await _db.SaveChangesAsync();
             return true;
         }

@@ -14,6 +14,7 @@ namespace StudyNetCore.Web.Models
         public string Note { get; set; }
         public int? StatusId { get; set; }
         public string Email { get; set; }
+        public IEnumerable<OrderDetailViewModel> Details { get; set; }
     }
 
     public class OrderDetailViewModel
@@ -21,9 +22,6 @@ namespace StudyNetCore.Web.Models
         public int Id { get; set; }
         public int? OrderId { get; set; }
         public int? ProductId { get; set; }
-        public string ProductName { get; set; }
-        public string ProductImg { get; set; }
-        public double Price { get; set; }
         public int? Quantity { get; set; }
     }
 }

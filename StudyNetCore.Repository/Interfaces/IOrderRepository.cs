@@ -12,5 +12,6 @@ namespace StudyNetCore.Repository.Interfaces
         Task<IEnumerable<OrderDetail>> GetOrderDetail(int id);
         Task<bool> UpdateOrder(Order data);
         Task<int> CreateOrder(Order data);
+        Task<bool> CreateOrderDetail(OrderDetail data);
     }
 }

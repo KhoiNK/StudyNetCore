@@ -28,14 +28,7 @@ namespace StudyNetCore.Web.Models
                 cfg.CreateMap<OrderViewModel, Order>();
 
                 cfg.CreateMap<OrderDetailViewModel, OrderDetail>();
-                cfg.CreateMap<OrderDetail, OrderDetailViewModel>()
-                .ForMember(
-                    view => view.ProductName,
-                    opt => opt.MapFrom(dto => dto.Product.Name)
-                ).ForMember(
-                    view => view.ProductImg,
-                    opt=>opt.MapFrom(dto=>dto.Product.ImgPath)
-                );
+                cfg.CreateMap<OrderDetail, OrderDetailViewModel>();
             });
             Mapper = config.CreateMapper();
         }

@@ -8,7 +8,7 @@
 
 	<!-- Wrapper for slides -->
 	<div class="carousel-inner" id="slider-items">
-	
+
 	</div>
 
 	<!-- Left and right controls -->
@@ -65,8 +65,9 @@
 	</div>
 	<div class="row artist-content">
 		<div class="col-md-12 col-xs-12" id="our_product">
-			<a *ngFor="let image of images" [routerLink]="['/client/image-detail', image.id]">
-				<div class="col-xs-6 col-md-3 artist-name-card">
+			<a *ngFor="let image of images, let i = index" [routerLink]="['/client/image-detail', image.id]">
+
+				<div class="col-xs-6 col-md-3 artist-name-card" *ngIf="i < 8">
 					<div class="artist-name-card-img">
 						<img src="{{image.imgPath}}" class="img-responsive artist-thumbail " />
 					</div>
@@ -77,6 +78,7 @@
 						</p>
 					</div>
 				</div>
+
 			</a>
 		</div>
 	</div>

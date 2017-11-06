@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './auth.service'
 
+import { OrderComponent } from './order/order.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TableListComponent } from './table-list/table-list.component';
 import { UserLogin } from './user-profile/user-login.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
 			{ path: '', component: UserLogin },
 			{ path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
 			{ path: 'images', component: ImageComponent, canActivate: [AuthGuard] },
+			{ path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
 		]
 	},
 	//   { path: '', redirectTo: 'login', pathMatch: 'full' }
