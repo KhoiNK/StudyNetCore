@@ -16,9 +16,10 @@ namespace StudyNetCore.Repository.Repository
         {
             _db = image;
         }
-        public Task<List<Order>> GetOrder()
+        public async Task<IEnumerable<Order>> GetOrder()
         {
-            return _db.Order.Include("OrderDetail").Include("OrderStatus").ToListAsync();
+            return await _db.Order.Include("Status").OrderByDescending(x => x.Id).ToListAsync();
+            //return await _db.Order.Include("Status").OrderByDescending(x=>x.Id).ToListAsync();
         }
 
         public async Task<IEnumerable<OrderDetail>> GetOrderDetail(int id)

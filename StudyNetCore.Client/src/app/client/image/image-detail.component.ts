@@ -1,3 +1,4 @@
+import { GlobalService } from './../../global.service';
 import { ArtistService } from '../artist/artist.service';
 import { ImageService } from './image.service';
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
@@ -17,7 +18,10 @@ export class ImageDetailComponent implements OnInit, OnDestroy {
 	public artist: any;
 	public subscription: Subscription;
 
-	constructor(private _image: ImageService, private activatedRoute: ActivatedRoute, private _artistSrv: ArtistService) {
+	constructor(private _image: ImageService,
+		private activatedRoute: ActivatedRoute,
+		private _artistSrv: ArtistService,
+		private _gloSrv: GlobalService) {
 		this.artist = {};
 		this.image = {};
 	}
@@ -42,11 +46,13 @@ export class ImageDetailComponent implements OnInit, OnDestroy {
 			let index = cart.products.findIndex(el => el.id === id);
 			index >= 0 ? cart.products[index].quantity++ : cart.products.push(Object.assign({}, this.image, { quantity: 1 }));
 			localStorage.setItem('cart', JSON.stringify(cart));
+			this._gloSrv.changeMess('success');
 		} else {
 			cart = {};
 			cart.products = [];
 			cart.products.push(Object.assign({}, this.image, { quantity: 1 }));
 			localStorage.setItem('cart', JSON.stringify(cart));
+			this._gloSrv.changeMess('success');
 		}
 	}
 

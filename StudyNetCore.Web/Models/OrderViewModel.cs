@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace StudyNetCore.Web.Models
         public string Phone { get; set; }
         public string Note { get; set; }
         public int? StatusId { get; set; }
+        public string Status { get; set; }
         public string Email { get; set; }
         public IEnumerable<OrderDetailViewModel> Details { get; set; }
     }
@@ -20,8 +22,10 @@ namespace StudyNetCore.Web.Models
     public class OrderDetailViewModel
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public int? OrderId { get; set; }
         public int? ProductId { get; set; }
+        public string ImgLink { get; set; }
         public int? Quantity { get; set; }
     }
 }

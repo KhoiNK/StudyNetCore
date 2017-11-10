@@ -17,10 +17,8 @@ export class UserLogin implements OnInit {
 	}
 
 	ngOnInit() {
-		let isNotExpired = tokenNotExpired(sessionStorage.getItem('token'));
-		if(isNotExpired){
-			this.router.navigate(['admin/images']);
-		}
+		let isNotExpired = tokenNotExpired('token');
+		if(isNotExpired) this.router.navigate(['admin/images']);
 	}
 
 	Login() {

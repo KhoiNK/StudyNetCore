@@ -53,6 +53,18 @@ namespace StudyNetCore.Repository.Repository
             var image = _db.Image.Where(x => x.Id == id).SingleOrDefault();
             if (image != null)
             {
+                var orderId = 0;
+                var details = _db.OrderDetail.Where(x => x.ProductId == image.Id).ToList();
+                if(details.Count > 0)
+                {
+                    foreach (var detail in details)
+                    {
+                        _db.OrderDetail.Remove(detail);
+                        orderId = detail.OrderId.Value;
+                    }
+                    var order = _db.Order.Where(x => x.Id == orderId).SingleOrDefault();
+                    _db.Order.Remove(order);
+                }
                 _db.Image.Remove(image);
                 _db.SaveChanges();
                 return true; 

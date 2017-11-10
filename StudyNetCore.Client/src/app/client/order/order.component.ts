@@ -1,3 +1,4 @@
+import { GlobalService } from './../../global.service';
 import { OrderService } from './../../admin/order/order.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -12,15 +13,17 @@ export class OrderComponent implements OnInit {
 	public images: any[];
 	public total: number;
 	public order: any;
-	constructor(private _router: Router, private _orderSrv: OrderService) {
+	constructor(private _router: Router, private _orderSrv: OrderService, private _gloSrv: GlobalService) {
 		this.total = 0;
 		this.images = [];
 		this.order = {};
 	}
 
 	ngOnInit() {
-		this.images = JSON.parse(localStorage.getItem('cart')).products;
-		this.countTotal(this.images);
+		if(localStorage.getItem('cart')){
+			this.images = JSON.parse(localStorage.getItem('cart')).products;
+			this.countTotal(this.images);
+		}
 	}
 
 	countTotal(list) {
@@ -35,6 +38,7 @@ export class OrderComponent implements OnInit {
 		let index = this.images.findIndex(el => el.id === id);
 		this.images[index].quantity = parseInt(quantity);
 		this.countTotal(this.images);
+		this._gloSrv.changeMess('success');
 	}
 
 	removeItem(id) {
@@ -43,6 +47,7 @@ export class OrderComponent implements OnInit {
 			let index = this.images.findIndex(el => el.id === id);
 			this.images.splice(index, 1);
 			this.countTotal(this.images);
+			this._gloSrv.changeMess('success');
 		}
 		else {
 			return;
@@ -54,6 +59,7 @@ export class OrderComponent implements OnInit {
 		if (result) {
 			localStorage.removeItem('cart');
 			this.images = [];
+			this._gloSrv.changeMess('success');
 			this._router.navigate(['/client']);
 		}
 		else {
@@ -62,6 +68,10 @@ export class OrderComponent implements OnInit {
 	}
 
 	submitOrder() {
+		if(!this.order.Name && !this.order.Email && !this.order.Phone && !this.order.Address){
+			this._gloSrv.changeMess('error');
+			return;
+		}
 		let order: any;
 		order = this.order;
 		order.Details = [];
@@ -71,11 +81,14 @@ export class OrderComponent implements OnInit {
 		console.log(order);
 		this._orderSrv.PostOrder(order).subscribe(res => {
 			if (res) {
-				alert('Purchase succeed!');
+				this._gloSrv.changeMess('success');
 				this._router.navigate(['/client']);
 				localStorage.removeItem('cart');
 			}
-		}, err => console.log(err));
+		}, err => {
+			this._gloSrv.changeMess('success');
+			this._router.navigate(['/client']);
+			localStorage.removeItem('cart');
+		});
 	}
-
 }

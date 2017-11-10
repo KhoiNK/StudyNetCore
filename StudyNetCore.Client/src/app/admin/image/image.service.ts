@@ -35,11 +35,11 @@ export class ImageService {
 	}
 
 	UpdateImage(data): Observable<any> {
-		return this._authHttp.patch(this.apiUrl + "Patch", data).map(res => res.json());
+		return this._http.patch(this.apiUrl + "Patch", data, this.options).map(res => res.json());
 	}
 
 	DeleteImage(id): Observable<any> {
-		return this._authHttp.delete(this.apiUrl + "Delete").map(res => res.json());
+		return this._http.delete(this.apiUrl + "Delete/" + id,  this.options).map(res => res.json());
 	}
 
 	UploadImage(file: string): Observable<any> {

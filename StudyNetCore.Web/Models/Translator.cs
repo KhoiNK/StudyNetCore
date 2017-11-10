@@ -18,17 +18,29 @@ namespace StudyNetCore.Web.Models
                 cfg.CreateMap<Image, ImageViewModel>()
                 .ForMember(
                     view => view.ArtistName,
-                    opt => opt.MapFrom(x=> x.Artist.Name)
+                    opt => opt.MapFrom(x => x.Artist.Name)
                 );
 
                 cfg.CreateMap<ArtistViewModel, Artist>();
                 cfg.CreateMap<Artist, ArtistViewModel>();
 
-                cfg.CreateMap<Order, OrderViewModel>();
+                cfg.CreateMap<Order, OrderViewModel>()
+                .ForMember(
+                    dto => dto.Status,
+                    opt => opt.MapFrom(entity => entity.Status.Name)
+                );
                 cfg.CreateMap<OrderViewModel, Order>();
 
                 cfg.CreateMap<OrderDetailViewModel, OrderDetail>();
-                cfg.CreateMap<OrderDetail, OrderDetailViewModel>();
+                cfg.CreateMap<OrderDetail, OrderDetailViewModel>()
+                .ForMember(
+                    dto => dto.Name,
+                    opt => opt.MapFrom(entity => entity.Product.Name)
+                )
+                .ForMember(
+                    dto => dto.ImgLink,
+                    opt => opt.MapFrom(entity => entity.Product.ImgPath)
+                );
             });
             Mapper = config.CreateMapper();
         }
@@ -51,7 +63,7 @@ namespace StudyNetCore.Web.Models
             artist.Id = data.Id;
             artist.Name = data.Name;
             artist.Description = data.Description;
-            foreach(var image in data.Image)
+            foreach (var image in data.Image)
             {
                 artist.Images.ToList().Add(image.Translate<Image, ImageViewModel>());
             }

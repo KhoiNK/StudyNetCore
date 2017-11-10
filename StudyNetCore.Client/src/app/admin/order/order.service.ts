@@ -20,8 +20,12 @@ export class OrderService {
 		this.options = new RequestOptions({ headers: this.headers });
 	}
 
-	GetOrder(pageIndex): Observable<any[]> {
-		return this._http.get(this.apiUrl + "Get/" + pageIndex, this.options).map(res => res.json());
+	GetAll(){
+		return this._http.get(this.apiUrl + "GetAll", this.options).map(res => res.json());
+	}
+
+	GetOrderDetail(id): Observable<any[]> {
+		return this._http.get(this.apiUrl + "Get/" + id, this.options).map(res => res.json());
 	}
 
 	PostOrder(image): Observable<any> {
@@ -29,11 +33,11 @@ export class OrderService {
 	}
 
 	UpdateOrder(data): Observable<any> {
-		return this._authHttp.patch(this.apiUrl + "Patch", data, this.options).map(res => res.json());
+		return this._http.patch(this.apiUrl + "Patch", data, this.options).map(res => res.json());
 	}
 
 	DeleteOrder(id): Observable<any> {
-		return this._authHttp.delete(this.apiUrl + "Delete", this.options).map(res => res.json());
+		return this._http.delete(this.apiUrl + "Delete", this.options).map(res => res.json());
 	}
 
 }

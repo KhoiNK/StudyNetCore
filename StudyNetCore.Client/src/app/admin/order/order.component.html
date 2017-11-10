@@ -1,3 +1,75 @@
-<p>
-  order works!
-</p>
+<div class="main-content" *ngIf="(orders.length | json) > 0">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header" data-background-color="red">
+						<h4 class="title">Order</h4>
+					</div>
+					<div class="card-content table-responsive">
+						<table class="table">
+							<thead class="text-danger">
+								<tr>
+									<th> </th>
+									<th>Name</th>
+									<th>Address</th>
+									<th>Phone</th>
+									<th>Email</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let order of orders">
+									<td><button style="background: unset; border: unset" (click)="loadDetail(order.id)">See detail</button></td>
+									<td>{{order.name}}</td>
+									<td>{{order.address}}</td>
+									<td>{{order.phone}}</td>
+									<td>{{order.email}}</td>
+									<td *ngIf="order.statusId === 1">
+										<button class="btn btn-success" (click)="changeStatus(order.id, 2)">Confirm</button>
+									</td>
+									<td *ngIf="order.statusId === 2">
+										<button class="btn btn-success" (click)="changeStatus(order.id, 3)">Complete</button>
+									</td>
+									<td *ngIf="order.statusId === 3" class="text-danger">
+										{{order.status}}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="main-content" *ngIf="(details.length | json) > 0">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-content table-responsive">
+						<table class="table">
+							<thead class="text-danger">
+								<tr>
+									<th>#</th>
+									<th>Imgage</th>
+									<th>Name</th>
+									<th>Quantity</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let detail of details">
+									<td>{{detail.id}}</td>
+									<td><img src="{{detail.imgLink}}" class="orders-table-image"/></td>
+									<td>{{detail.name}}</td>
+									<td>{{detail.quantity}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

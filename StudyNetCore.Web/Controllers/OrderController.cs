@@ -8,11 +8,11 @@ using StudyNetCore.Repository.Interfaces;
 using StudyNetCore.Web.Models;
 using StudyNetCore.Repository.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Concurrent;
 
 namespace StudyNetCore.Web.Controllers
 {
 
-    [Produces("application/json")]
     [Route("api/[controller]/[action]/{id?}")]
     public class OrderController : Controller
     {
@@ -22,11 +22,15 @@ namespace StudyNetCore.Web.Controllers
         {
             _repo = order;
         }
-        public IActionResult Get()
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult GetAll()
         {
             try
             {
-                return Ok(_repo.GetOrder().Result.Translate<Order, OrderViewModel>());
+                var result = _repo.GetOrder().Result;
+                return Ok(result.Translate<Order, OrderViewModel>());
             }
             catch (Exception e)
             {
@@ -34,6 +38,8 @@ namespace StudyNetCore.Web.Controllers
             }
         }
 
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult Get(int id)
         {
             try
@@ -73,7 +79,8 @@ namespace StudyNetCore.Web.Controllers
             {
                 var result = _repo.UpdateOrder(data.Translate<OrderViewModel, Order>());
                 return Ok(result);
-            } catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.StackTrace);
             }
